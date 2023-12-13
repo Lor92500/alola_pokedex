@@ -13,6 +13,7 @@ const PokemonCard = ({ pokemon }) => {
             )}
             <figcaption>{pokemon.name}</figcaption>
         </figure>
+
     );
 }
 
