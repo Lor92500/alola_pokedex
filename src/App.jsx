@@ -1,17 +1,9 @@
-import React from 'react';
 import PokemonCard from './components/PokemonCard';
 import { useState } from 'react';
+import NavBar from './components/NavBar';
 
-const App = () => {
+function App() {
   const [pokemonIndex, setPokemonIndex] = useState(0);
-
-  const handlePrevious = () => {
-    setPokemonIndex((prevIndex) => (prevIndex > 0 ? prevIndex - 1 : prevIndex));
-  };
-  const handleNext = () => {
-    setPokemonIndex((prevIndex) => (prevIndex < pokemonList.length - 1 ? prevIndex + 1 : prevIndex));
-  };
-
   const pokemonList = [
     {
       name: "bulbasaur",
@@ -38,19 +30,24 @@ const App = () => {
     },
   ];
 
-  const pokemonData = pokemonList[pokemonIndex];
+  const handlePrevious = () => {
+    setPokemonIndex((prevIndex) => (prevIndex > 0 ? prevIndex - 1 : prevIndex));
+  };
+  const handleNext = () => {
+    setPokemonIndex((prevIndex) => (prevIndex < pokemonList.length - 1 ? prevIndex + 1 : prevIndex));
+  };
+
 
   return (
-    <div className='App'>
-      {pokemonIndex > 0 && (
-        <button onClick={handlePrevious}>Précédent</button>
-      )}
-      {pokemonIndex < pokemonList.length - 1 && (
-        <button onClick={handleNext}>Suivant</button>
-      )}
+    <>
+      <PokemonCard pokemon={pokemonList[pokemonIndex]} />
+      <NavBar handlePrevious={handlePrevious}
+        handleNext={handleNext}
+        pokemonIndex={pokemonIndex}
+        pokemonListLength={pokemonList.length}
+      />
 
-      {pokemonData.imgSrc && <img src={pokemonData.imgSrc} alt={pokemonData.name} />}
-    </div>
+    </>
   );
 }
 
